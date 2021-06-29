@@ -151,7 +151,7 @@ module Clear::Model::HasColumns
     {%
       unless converter
         if _type.is_a?(Path)
-          if _type.resolve.stringify =~ /\(/
+          if _type.resolve.stringify.includes?("(")
             converter = _type.stringify
           else
             converter = _type.resolve.stringify
@@ -181,6 +181,7 @@ module Clear::Model::HasColumns
         crystal_variable_name: name.var,
         presence:              presence,
         mass_assign:           mass_assign,
+        default:               name.value,
       }
     %}
   end
@@ -204,9 +205,15 @@ module Clear::Model::HasColumns
                  "not nilable type (e.g. Int32 instead of Int32?). Clear will use the nilable parameter of the model instead." %}
       {% end %}
 
+      {% if settings[:default].is_a?(Nop) %}
       @{{var_name}}_column : Clear::Model::Column({{type}}, {{converter}}) =
         Clear::Model::Column({{type}}, {{converter}}).new({{db_name}},
         has_db_default: {{has_db_default}} )
+      {% else %}
+      @{{var_name}}_column : Clear::Model::Column({{type}}, {{converter}}) =
+      Clear::Model::Column({{type}}, {{converter}}).new({{db_name}}, value: {{settings[:default]}},
+      has_db_default: {{has_db_default}} )
+      {% end %}
 
       # Returns the column object used to manage `{{var_name}}` field
       #
