@@ -25,8 +25,7 @@ dependencies:
   pg:
     github: will/crystal-pg
   inflector:
-    github: anykeyh/inflector.cr
-    branch: master
+    github: phoffer/inflector.cr
 
 development_dependencies:
   ameba:
