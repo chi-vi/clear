@@ -51,7 +51,7 @@ module Clear
         when ::JSON::Any
           ::{{type}}.new(::JSON::PullParser.new(x.to_json))
         else
-          raise {{"Cannot convert to #{type} from \#{x.class}"}}
+          raise "Cannot convert to {{type}} from #{x.class}"
         end
       end
 
