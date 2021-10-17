@@ -279,8 +279,8 @@ module Clear::Model::HasColumns
 
       {% verbatim do %}
         {% for name, settings in COLUMNS %}
-          v = h.fetch(:\{{settings[:db_column_name]}}){ Column::UNKNOWN }
-          @{{settings[:crystal_variable_name]}}_column.reset_convert(v) unless v.is_a?(Column::UnknownClass)
+          v = h.fetch(:\{{settings[:db_column_name]}}){ Clear::Model::Column::UNKNOWN }
+          @{{settings[:crystal_variable_name]}}_column.reset_convert(v) unless v.is_a?(Clear::Model::Column::UnknownClass)
         {% end %}
       {% end %}
       self
@@ -292,8 +292,8 @@ module Clear::Model::HasColumns
 
       {% verbatim do %}
         {% for name, settings in COLUMNS %}
-          v = h.fetch({{settings[:db_column_name]}}){ Column::UNKNOWN }
-          @{{settings[:crystal_variable_name]}}_column.reset_convert(v) unless v.is_a?(Column::UnknownClass)
+          v = h.fetch({{settings[:db_column_name]}}){ Clear::Model::Column::UNKNOWN }
+          @{{settings[:crystal_variable_name]}}_column.reset_convert(v) unless v.is_a?(Clear::Model::Column::UnknownClass)
         {% end %}
       {% end %}
 
@@ -333,7 +333,7 @@ module Clear::Model::HasColumns
 
       {% verbatim do %}
         {% for name, settings in COLUMNS %}
-          v = h.fetch(:{{settings[:db_column_name]}}){ Column::UNKNOWN }
+          v = h.fetch(:{{settings[:db_column_name]}}){ Clear::Model::Column::UNKNOWN }
           @{{settings[:crystal_variable_name]}}_column.set_convert(v) unless v.is_a?(Column::UnknownClass)
         {% end %}
       {% end %}
@@ -347,7 +347,7 @@ module Clear::Model::HasColumns
 
       {% verbatim do %}
         {% for name, settings in COLUMNS %}
-          v = h.fetch({{settings[:db_column_name]}}){ Column::UNKNOWN }
+          v = h.fetch({{settings[:db_column_name]}}){ Clear::Model::Column::UNKNOWN }
           @{{settings[:crystal_variable_name]}}_column.set_convert(v) unless v.is_a?(Column::UnknownClass)
         {% end %}
       {% end %}
