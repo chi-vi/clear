@@ -1,7 +1,7 @@
 class Clear::SQL::ConnectionPool
   @@databases = {} of String => DB::Database
 
-  @@fiber_connections = {} of {String, Fiber} => ::PG::Connection
+  @@fiber_connections = {} of {String, Fiber} => DB::Connection
 
   def self.init(uri, name)
     @@databases[name] = DB.open(uri)

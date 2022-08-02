@@ -10,7 +10,7 @@ require "./transaction"
 # Add a field to DB::Database to handle
 #   the state of transaction of a specific
 #   connection
-abstract class DB::Connection
+class DB::Connection
   # add getter to transaction status for this specific DB::Connection
   property? _clear_in_transaction : Bool = false
 end
@@ -155,7 +155,11 @@ module Clear
     # ```
     #
     def execute(connection_name : String, sql)
-      log_query(sql) { Clear::SQL::ConnectionPool.with_connection(connection_name, &.exec_all(sql)) }
+      log_query(sql) do
+        Clear::SQL::ConnectionPool.with_connection(connection_name) do |cnn|
+          cnn.exec_all(sql) if cnn.is_a?(::PG::Connection)
+        end
+      end
     end
 
     # :ditto:
