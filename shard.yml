@@ -2,7 +2,7 @@ name: clear
 
 version: 0.9
 
-crystal: 1.2.0
+crystal: 1.5.0
 
 authors:
   - Yacine Petitprez <anykeyh@gmail.com>
@@ -19,12 +19,15 @@ targets:
 dependencies:
   admiral:
     github: jwaldrip/admiral.cr
+  
   generate:
     github: anykeyh/generate.cr
     branch: master
+    
   pg:
     github: will/crystal-pg
-    version: 0.24.0
+    version: 0.26.0
+  
   inflector:
     github: phoffer/inflector.cr
 
